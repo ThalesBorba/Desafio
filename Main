@@ -1,0 +1,27 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class NovaClasse {
+
+	public static void main(String[] args) {
+		
+		System.out.println("Digite um numero entre 0 e 10.000.000 (sem pontos): ");
+		Scanner leitura = new Scanner(System.in);
+		try {
+			double numero = leitura.nextDouble();
+			if(numero > 10000000 || numero < 0) {
+				System.out.println("Número fora da extensão.");
+				} else {
+			int inteiro = (int) numero;
+			System.out.println(inteiro);
+				}
+		} 
+		catch(InputMismatchException ex) {
+			System.out.println("Numero inválido");
+		}
+		finally {
+			leitura.close();
+		}
+		
+	}
+}
