@@ -6,7 +6,7 @@ import java.util.List;
 public class Conversor {
 
 	private static String Numeros[][] = {  
-			{"zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez",  
+			{"zero", "um", "dois", "trÃªs", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez",  
 		     "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"},  
 		    {"vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"},  
 		    {"cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos",  
@@ -66,7 +66,7 @@ public class Conversor {
 		return porExtenso;
 		}
 	
-	ArrayList<String> porExtenso = new ArrayList<>(Arrays.asList("zero", "um", "dois", "três", "quatro", "cinco",
+	ArrayList<String> porExtenso = new ArrayList<>(Arrays.asList("zero", "um", "dois", "trÃªs", "quatro", "cinco",
 			"seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis",
 			"dezessete", "dezoito", "dezenove", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", 
 			"setenta", "oitenta", "noventa", "cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos",
@@ -80,15 +80,66 @@ public class Conversor {
 		String listaDeNumerosPorExtenso[] = numero.toLowerCase().split(" ");
 		
 		List<String> n = new ArrayList<>();
+		String unidade, dezena, centena, milhar = "";
+		
+		
+		for(int c = 0; c<= 9; c++) {
+			if(porExtenso.get(c).matches(listaDeNumerosPorExtenso[listaDeNumerosPorExtenso.length -1])) {
+			unidade = Numerais.get(c);
+			n.add(unidade);
+			}
+			}
+		
+		
+		for(int c = 10; c<= 19; c++) {
+				if(porExtenso.get(c).matches(listaDeNumerosPorExtenso[listaDeNumerosPorExtenso.length-1])) {
+			unidade = Numerais.get(c-10);
+			n.add(unidade);
+			n.add("1");
+			}
+			
+		}
 		
 		for(int a = listaDeNumerosPorExtenso.length; a > 0; a--) {
-			for(int c = 0; c<= 19; c++) {
+			for(int c = 20; c<= 27; c++) {
 				if(porExtenso.get(c).matches(listaDeNumerosPorExtenso[a-1])) {
-			String numeroEncontrado = Numerais.get(c);
-			n.add(numeroEncontrado);
+			dezena = Numerais.get(c-18);
+			n.add(dezena);
 			}
 			}
 		}
+		
+		for(int a = listaDeNumerosPorExtenso.length; a > 0; a--) {
+			for(int c = 29; c<= 37; c++) {
+				if(porExtenso.get(c).matches(listaDeNumerosPorExtenso[a-1])) {
+			centena = Numerais.get(c-28);
+			n.add(centena);
+			}
+			}
+		}
+		
+		if(porExtenso.get(38).matches(listaDeNumerosPorExtenso[0])) {
+			if(listaDeNumerosPorExtenso.length == 1) {
+				n.add("1000");
+			} else {
+			n.add("1");
+		}
+		}
+			
+		if(listaDeNumerosPorExtenso.length > 1 && porExtenso.get(38).matches(listaDeNumerosPorExtenso[1])) {
+			for(int c = 2; c<= 9; c++) {
+			if(porExtenso.get(c).matches(listaDeNumerosPorExtenso[0])) {
+			milhar = Numerais.get(c);
+			n.add(milhar);
+			}
+			}
+		}
+		
+		if(porExtenso.get(28).matches(listaDeNumerosPorExtenso[0])) {
+			n.clear();
+			n.add("100");
+		}
+		
 		Collections.reverse(n);
 		int numeralConvertido = Integer.parseInt(String.join("", n));
 		
@@ -96,6 +147,3 @@ public class Conversor {
 	
 	}
 }
-	
-	
-
