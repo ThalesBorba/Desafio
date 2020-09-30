@@ -16,25 +16,10 @@ public class TesteJornal{
         Gson gson = new Gson();
         JornalResponse jornalResponse = gson.fromJson(response.getBody(), JornalResponse.class);
         ArrayList<Jornal> listaDeJornais = jornalResponse.getJornais();
-        /*for(int i = 0; i < listaDeJornais.size(); i++) {
-              System.out.println(listaDeJornais.get(i).getTitulo());
-        }*/
 
-
-
-       /*for (Jornal jornal : listaDeJornais) {
-            System.out.println(jornal.getPreco());
-        }*/
-
-        //System.out.println(response.getBody());
-
-        
         ResumoJornal resumoJornal = new ResumoJornal(listaDeJornais);
 
-        System.out.println(response.getBody());
-
-
-        System.out.println();
+        System.out.println(resumoJornal.quantidadeDeJornaisDaLista());
 
 
     }

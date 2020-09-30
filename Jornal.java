@@ -10,7 +10,8 @@ public class Jornal implements Comparable<Jornal> {
     private String origem;
     private String subtitulo;
     private String lingua;
-    private Date data_de_publicacao;
+    @SerializedName("data_de_publicacao")
+    private Date dataDePublicacao;
     private int likes;
     private int unlikes;
     private double preco;
@@ -35,8 +36,8 @@ public class Jornal implements Comparable<Jornal> {
         return lingua;
     }
 
-    public Date getData_de_publicacao() {
-        return data_de_publicacao;
+    public Date getDataDePublicacao() {
+        return dataDePublicacao;
     }
 
     public int getLikes() {
@@ -53,6 +54,11 @@ public class Jornal implements Comparable<Jornal> {
 
     @Override
     public int compareTo(Jornal outroJornal) {
-        return this.getData_de_publicacao().compareTo(outroJornal.data_de_publicacao);
+        return this.getDataDePublicacao().compareTo(outroJornal.dataDePublicacao);
+    }
+
+    @Override
+    public String toString() {
+        return nomeDoJornal;
     }
 }
